@@ -113,5 +113,9 @@
         "../Manayacal/dependancies/lwjgl/lwjgl-zstd-natives-macos.jar",
         "../Manayacal/dependancies/lwjgl/lwjgl-zstd.jar",
         "../Manayacal/dependancies/lwjgl/lwjgl.jar"
+    ],
+    "java.project.outputPath": "builds",
+    "java.project.sourcePaths": [
+        "source"
     ]
 }

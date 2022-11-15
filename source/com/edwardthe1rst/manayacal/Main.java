@@ -15,7 +15,9 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class Main {
 
-	private long window;
+	public long window;
+	IntBuffer width = BufferUtils.createIntBuffer(4);
+	IntBuffer height = BufferUtils.createIntBuffer(4);
 
 	public void run() {
 		System.out.println("Hello LWJGL " + Version.getVersion() + "!");
@@ -40,7 +42,8 @@ public class Main {
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 
-		window = glfwCreateWindow(300, 300, "Hello World!", NULL, NULL);
+
+		window = glfwCreateWindow(2000, 1000, "Hello World!", NULL, NULL);
 		if ( window == NULL )
 			throw new RuntimeException("Failed to create the GLFW window");
 
@@ -73,7 +76,7 @@ public class Main {
 	private void loop() {
 		GL.createCapabilities();
 
-		glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+		glClearColor(0.0f, 1.0f, 0.0f, 0.0f);
 
 		while ( !glfwWindowShouldClose(window) ) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -82,6 +85,7 @@ public class Main {
 
 			glfwPollEvents();
 		}
+		glfwGetWindowSize(window, width, height);
 	}
 
 	public static void main(String[] args) {

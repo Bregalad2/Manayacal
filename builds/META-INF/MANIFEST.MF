@@ -1,0 +1,2 @@
+
+Main-Class: com.edwardthe1rst.manayacal.Main
