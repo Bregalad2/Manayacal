@@ -112,7 +112,7 @@
         "../Manayacal/dependancies/lwjgl/lwjgl-zstd-javadoc.jar",
         "../Manayacal/dependancies/lwjgl/lwjgl-zstd-natives-macos.jar",
         "../Manayacal/dependancies/lwjgl/lwjgl-zstd.jar",
-        "../Manayacal/dependancies/lwjgl/lwjgl.jar"
+        "../Manayacal/dependancies/json-simple-1.1.jar"
     ],
     "java.project.outputPath": "builds",
     "java.project.sourcePaths": [
