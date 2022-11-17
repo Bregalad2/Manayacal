@@ -2,18 +2,27 @@ package com.edwardthe1rst.manayacal;
 
 import java.io.File;
 import java.io.FileReader;
+import java.util.Dictionary;
+
 import org.json.simple.*;
 import org.json.simple.parser.*;
+
+import com.badlogic.gdx.graphics.Texture;
 
 public class DataLoader {
     JSONObject BLOCKS = null;
     JSONObject ITEMS = null;
     JSONObject ENTITIES = null;
+    Dictionary<String, Texture> BlockImages = null;
+    Dictionary<String, Texture> ItemImages = null;
+    Dictionary<String, Texture> EntityImages = null;
     public void init (File[] paths) {
         paths[paths.length+1] = new File("../resources");
 
         for (Integer i = 0; i < paths.length; i++) {
             File path = paths[i];
+
+            //blocks
             try {
                 File[] blockfiles = new File(path.toString()+"/blocks").listFiles();
                 for (Integer a = 0; a < blockfiles.length; a++) {
@@ -28,6 +37,8 @@ public class DataLoader {
                     } catch (Exception e) {}
                 }
             } catch (Exception e) {}
+
+            //items
 
             try {
                 File[] itemfiles = new File(path.toString()+"/items").listFiles();
@@ -44,6 +55,8 @@ public class DataLoader {
                 }
             } catch (Exception e) {}
 
+            //entities
+
             try {
                 File[] entityfiles = new File(path.toString()+"/entities").listFiles();
                 for (Integer a = 0; a < entityfiles.length; a++) {
@@ -54,6 +67,48 @@ public class DataLoader {
                             JSONObject jo = (JSONObject) obj;
                             String id = (String) jo.get("id");
                             ENTITIES.put(id, jo);
+                        }
+                    } catch (Exception e) {}
+                }
+            } catch (Exception e) {}
+
+            // images
+            // blocks
+            try {
+                File[] blockimagefiles = new File(path.toString()+"/blocks").listFiles();
+                for (Integer a = 0; a < blockimagefiles.length; a++) {
+                    try {
+                        File blockfile = blockimagefiles[a];
+                        if (blockfile.toString().endsWith(".png")) {
+                            Texture image = new Texture(blockfile.toString());
+                            BlockImages.put(blockfile.toString().split("/")[-1].replace(".png", ""), image);
+                        }
+                    } catch (Exception e) {}
+                }
+            } catch (Exception e) {}
+
+            //items
+
+            try {
+                File[] itemimagefiles = new File(path.toString()+"/blocks").listFiles();
+                for (Integer a = 0; a < itemimagefiles.length; a++) {
+                    try {
+                        File itemfile = itemimagefiles[a];
+                        if (itemfile.toString().endsWith(".png")) {
+                            Texture image = new Texture("badlogic.jpg");
+                            ItemImages.put(itemfile.toString().split("/")[-1].replace(".png", ""), image);
+                        }
+                    } catch (Exception e) {}
+                }
+            } catch (Exception e) {}
+            try {
+                File[] entityfiles = new File(path.toString()+"/blocks").listFiles();
+                for (Integer a = 0; a < entityfiles.length; a++) {
+                    try {
+                        File entityfile = entityfiles[a];
+                        if (entityfile.toString().endsWith(".png")) {
+                            Texture image = new Texture("badlogic.jpg");
+                            EntityImages.put(entityfile.toString().split("/")[-1].replace(".png", ""), image);
                         }
                     } catch (Exception e) {}
                 }

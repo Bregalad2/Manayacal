@@ -117,5 +117,6 @@
     "java.project.outputPath": "builds",
     "java.project.sourcePaths": [
         "source"
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

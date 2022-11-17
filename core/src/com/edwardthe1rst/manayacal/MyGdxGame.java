@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.edwardthe1rst.manayacal;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;
