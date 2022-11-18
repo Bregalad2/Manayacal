@@ -79,6 +79,7 @@ project(":core") {
         api "com.badlogicgames.gdx:gdx-bullet:$gdxVersion"
         api "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+        implementation 'org.xerial:sqlite-jdbc:3.30.1'
         
     }
 }

@@ -1,31 +1,36 @@
 package com.edwardthe1rst.manayacal;
 
+import java.io.File;
+
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MyGdxGame extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
+	PlayingScreen PScreen;
+	WorldLoader wLoader;
+	DataLoader dLoader;
 	
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		PScreen = new PlayingScreen();
+		dLoader = new DataLoader();
+		wLoader = new WorldLoader();
+
+		wLoader.init(new File("world"));
+		dLoader.init(null);
+		PScreen.init(null, null);
 	}
 
 	@Override
 	public void render () {
 		ScreenUtils.clear(1, 0, 0, 1);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+		if (PScreen != null) {
+			PScreen.loop();
+		}
+		
 	}
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
-		img.dispose();
 	}
 }

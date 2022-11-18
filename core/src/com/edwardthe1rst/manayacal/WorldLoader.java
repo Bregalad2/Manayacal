@@ -1,14 +1,15 @@
 package com.edwardthe1rst.manayacal;
 
 import java.sql.*;
-import java.nio.file.*;
+import java.io.File;
 
 public class WorldLoader {
     Connection WorldDB = null;
     Statement WorldReader = null;
-    public void init(Path WorldPath) {
+    public void init(File WorldPath) {
         try {
-            WorldDB = DriverManager.getConnection("jdbc:sqlite:"+WorldPath.toString()+"/World.dat");
+            //Class.forName("com.mysql.jdbc.Driver"); 
+            WorldDB = DriverManager.getConnection("jdbc:mysql:"+WorldPath.toString()+"/World.dat");
             WorldReader = WorldDB.createStatement();
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );

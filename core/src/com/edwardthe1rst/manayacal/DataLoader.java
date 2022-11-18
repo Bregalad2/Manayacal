@@ -3,6 +3,8 @@ package com.edwardthe1rst.manayacal;
 import java.io.File;
 import java.io.FileReader;
 import java.util.Dictionary;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.json.simple.*;
 import org.json.simple.parser.*;
@@ -10,17 +12,21 @@ import org.json.simple.parser.*;
 import com.badlogic.gdx.graphics.Texture;
 
 public class DataLoader {
+    List<File> Paths =  new LinkedList<File>();
     JSONObject BLOCKS = null;
     JSONObject ITEMS = null;
     JSONObject ENTITIES = null;
     Dictionary<String, Texture> BlockImages = null;
     Dictionary<String, Texture> ItemImages = null;
     Dictionary<String, Texture> EntityImages = null;
-    public void init (File[] paths) {
-        paths[paths.length+1] = new File("../resources");
+    public void init (List<File> paths) {
+        if (paths != null) {
+            Paths.addAll(paths);
+        }
+        Paths.add(new File("../resources"));
 
-        for (Integer i = 0; i < paths.length; i++) {
-            File path = paths[i];
+        for (Integer i = 0; i < Paths.size(); i++) {
+            File path = Paths.get(i);
 
             //blocks
             try {
@@ -114,5 +120,8 @@ public class DataLoader {
                 }
             } catch (Exception e) {}
         }
+    }
+
+    public void destroy () {
     }
 }
