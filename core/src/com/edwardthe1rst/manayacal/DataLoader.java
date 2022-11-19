@@ -3,8 +3,10 @@ package com.edwardthe1rst.manayacal;
 import java.io.File;
 import java.io.FileReader;
 import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.*;
 import org.json.simple.parser.*;
@@ -16,14 +18,14 @@ public class DataLoader {
     JSONObject BLOCKS = null;
     JSONObject ITEMS = null;
     JSONObject ENTITIES = null;
-    Dictionary<String, Texture> BlockImages = null;
-    Dictionary<String, Texture> ItemImages = null;
-    Dictionary<String, Texture> EntityImages = null;
+    Map<String, Texture> BlockImages = new HashMap<String, Texture>();
+    Map<String, Texture> ItemImages = new HashMap<String, Texture>();
+    Map<String, Texture> EntityImages = new HashMap<String, Texture>();
     public void init (List<File> paths) {
         if (paths != null) {
             Paths.addAll(paths);
         }
-        Paths.add(new File("../resources"));
+        Paths.add(new File("resources"));
 
         for (Integer i = 0; i < Paths.size(); i++) {
             File path = Paths.get(i);
@@ -87,11 +89,12 @@ public class DataLoader {
                         File blockfile = blockimagefiles[a];
                         if (blockfile.toString().endsWith(".png")) {
                             Texture image = new Texture(blockfile.toString());
-                            BlockImages.put(blockfile.toString().split("/")[-1].replace(".png", ""), image);
+                            String name = blockfile.toString().split("/")[blockfile.toString().split("/").length-1].replace(".png", "");
+                            BlockImages.put(name, image);
                         }
-                    } catch (Exception e) {}
+                    } catch (Exception e) {System.out.println(e.getMessage());}
                 }
-            } catch (Exception e) {}
+            } catch (Exception e) {System.out.println(e.getMessage());}
 
             //items
 

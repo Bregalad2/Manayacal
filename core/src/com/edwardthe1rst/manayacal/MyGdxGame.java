@@ -2,23 +2,23 @@ package com.edwardthe1rst.manayacal;
 
 import java.io.File;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.*;
+import com.badlogic.gdx.utils.*;
 
 public class MyGdxGame extends ApplicationAdapter {
+
 	PlayingScreen PScreen;
-	WorldLoader wLoader;
-	DataLoader dLoader;
+    DataLoader dLoader;
+    WorldLoader wLoader;
 	
 	@Override
 	public void create () {
 		PScreen = new PlayingScreen();
 		dLoader = new DataLoader();
 		wLoader = new WorldLoader();
-
 		wLoader.init(new File("world"));
 		dLoader.init(null);
-		PScreen.init(null, null);
+		PScreen.init(dLoader, wLoader);
 	}
 
 	@Override
@@ -27,7 +27,6 @@ public class MyGdxGame extends ApplicationAdapter {
 		if (PScreen != null) {
 			PScreen.loop();
 		}
-		
 	}
 	
 	@Override
