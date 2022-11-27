@@ -1,0 +1,46 @@
+Manifest-Version: 1.0
+Main-Class: com.edwardtherst.desktopmodule.DesktopLauncher
+Class-Path: dependencies/lwjgl-glfw-3.3.1-natives-linux-arm64.jar depend
+ encies/game.jar dependencies/jme3-core-3.5.2-stable.jar dependencies/gu
+ ava-19.0.jar dependencies/jmf-2.1.1e.jar dependencies/lwjgl-jemalloc-3.
+ 3.1-natives-windows-x86.jar dependencies/lwjgl-3.3.1-natives-linux-arm3
+ 2.jar dependencies/lwjgl-jemalloc-3.3.1-natives-macos-arm64.jar depende
+ ncies/lwjgl-3.3.1-natives-windows.jar dependencies/lwjgl-glfw-3.3.1-nat
+ ives-macos.jar dependencies/jme3-effects-3.5.2-stable.jar dependencies/
+ slf4j-api-1.7.32.jar dependencies/junit-4.10.jar dependencies/jbullet-1
+ .0.2.jar dependencies/lwjgl-opengl-3.3.1-natives-linux-arm64.jar depend
+ encies/jme3-desktop-3.5.2-stable.jar dependencies/lwjgl-3.3.1-natives-m
+ acos.jar dependencies/sqlite-jdbc-3.30.1.jar dependencies/gson-2.8.1.ja
+ r dependencies/lwjgl-openal-3.3.1-natives-linux-arm64.jar dependencies/
+ jme3-jbullet-3.5.2-stable.jar dependencies/lwjgl-glfw-3.3.1-natives-mac
+ os-arm64.jar dependencies/lwjgl-glfw-3.3.1-natives-windows-x86.jar depe
+ ndencies/lemur-1.16.0.jar dependencies/jme3-terrain-3.5.2-stable.jar de
+ pendencies/lwjgl-jemalloc-3.3.1-natives-linux-arm64.jar dependencies/lw
+ jgl-glfw-3.3.1-natives-windows.jar dependencies/lwjgl-glfw-3.3.1.jar de
+ pendencies/lwjgl-jemalloc-3.3.1-natives-macos.jar dependencies/vecmath-
+ 1.5.2.jar dependencies/lwjgl-openal-3.3.1-natives-macos.jar dependencie
+ s/lwjgl-opengl-3.3.1.jar dependencies/lwjgl-openal-3.3.1-natives-macos-
+ arm64.jar dependencies/lwjgl-openal-3.3.1-natives-windows-x86.jar depen
+ dencies/jme3-jogg-3.5.2-stable.jar dependencies/lwjgl-opengl-3.3.1-nati
+ ves-windows-x86.jar dependencies/lwjgl-opengl-3.3.1-natives-linux.jar d
+ ependencies/lwjgl-opengl-3.3.1-natives-macos-arm64.jar dependencies/lwj
+ gl-glfw-3.3.1-natives-linux-arm32.jar dependencies/json-simple-1.1.1.ja
+ r dependencies/log4j-core-2.19.0.jar dependencies/lwjgl-3.3.1-natives-l
+ inux-arm64.jar dependencies/lwjgl-opengl-3.3.1-natives-windows.jar depe
+ ndencies/lwjgl-jemalloc-3.3.1-natives-linux.jar dependencies/lwjgl-open
+ al-3.3.1-natives-linux.jar dependencies/hamcrest-core-1.1.jar dependenc
+ ies/lwjgl-opengl-3.3.1-natives-linux-arm32.jar dependencies/lwjgl-opena
+ l-3.3.1.jar dependencies/lwjgl-opengl-3.3.1-natives-macos.jar dependenc
+ ies/lwjgl-openal-3.3.1-natives-linux-arm32.jar dependencies/lwjgl-opena
+ l-3.3.1-natives-windows.jar dependencies/lwjgl-jemalloc-3.3.1.jar depen
+ dencies/lwjgl-3.3.1.jar dependencies/log4j-api-2.19.0.jar dependencies/
+ lemur-proto-1.13.0.jar dependencies/lwjgl-jemalloc-3.3.1-natives-window
+ s.jar dependencies/stack-alloc-1.0.2.jar dependencies/j-ogg-all-1.0.1.j
+ ar dependencies/jme3-networking-3.5.2-stable.jar dependencies/lwjgl-jem
+ alloc-3.3.1-natives-linux-arm32.jar dependencies/lwjgl-3.3.1-natives-ma
+ cos-arm64.jar dependencies/lwjgl-3.3.1-natives-windows-x86.jar dependen
+ cies/lwjgl-glfw-3.3.1-natives-linux.jar dependencies/jme3-plugins-3.5.2
+ -stable.jar dependencies/jme3-lwjgl3-3.5.2-stable.jar dependencies/lwjg
+ l-3.3.1-natives-linux.jar dependencies/lwjgl-opencl-3.3.1.jar 
+Created-By: Jme3-Gradle
+

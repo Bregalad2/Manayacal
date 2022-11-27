@@ -1,4 +1,4 @@
-package com.edwardthe1rst.manayacal;
+package com.edwardtherst.game;
 
 import java.sql.*;
 

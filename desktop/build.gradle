@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.edwardtherst'
-version '1.0.0'
+version '0.0.1'
 mainClassName = 'com.edwardtherst.desktopmodule.DesktopLauncher'
 String dependenciesString = ""
 
@@ -70,4 +70,28 @@ task releaseJar(type: Jar, dependsOn: copyJars) {
     }
     //tag the jar task to inject this task into it
     with jar
+}
+
+task BuildJar(type: Jar) {
+    manifest {
+        attributes(
+                'Main-Class': 'com.edwardthe1rst.desktoplauncher.DesktopLauncher'             
+        )
+    }
+    classifier = 'all'
+    baseName = 'MyJar'
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+         }
+            {
+                exclude "META-INF/*.SF"
+                exclude "META-INF/*.DSA"
+                exclude "META-INF/*.RSA"
+            }
+    with jar
+
+}
+
+task runJar(type : Jar) {
+
 }
