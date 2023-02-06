@@ -41,6 +41,7 @@ public class WorldLoader {
     public boolean addBlock(Integer  x, Integer  y, Integer  dim,String id, String state) {
         try {
             WorldReader.executeUpdate("INSERT INTO blocks VALUES ("+x.toString()+", "+y.toString()+", "+dim.toString()+", '"+id+"', '"+state+"')");
+            WorldDB.commit();
         } catch (SQLException e) {
             return false;
         }
@@ -75,5 +76,12 @@ public class WorldLoader {
 
     public String getEntities(Integer  dim) {
         return "true";
+    }
+
+    public Boolean save() {
+        try {
+            WorldDB.commit();
+        } catch (Exception e) {System.err.println(e.getMessage());}
+        return false;
     }
 }
