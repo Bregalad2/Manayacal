@@ -1,6 +1,8 @@
 package com.edwardtherst.game;
 
 import java.io.File;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.AppState;
@@ -18,6 +20,7 @@ public class Manayacal extends SimpleApplication implements ActionListener {
     PlayingScreen pScreen;
     DataLoader dLoader;
     WorldLoader wLoader;
+    public static final BlockingQueue<Runnable> queue = new LinkedBlockingQueue<Runnable>();
 
     public Manayacal() {
     }
@@ -44,13 +47,21 @@ public class Manayacal extends SimpleApplication implements ActionListener {
         dLoader.init(null, assetManager);
         wLoader.init(new File("/Users/eddylabadorf/Documents/GitHub/manayacal/game/src/main/resources/world"));
         flyCam.setEnabled(false);
-        pScreen.init(dLoader, wLoader, assetManager, rootNode, cam);
+        pScreen.init(dLoader, wLoader, assetManager, rootNode, cam, queue);
+        inputManager.setCursorVisible(false);
         registerInput();
     }
 
     @Override
     public void onAction(String name, boolean pressed, float tpf){
         pScreen.onAction(name, pressed, tpf);
+    }
+
+    @Override
+    public void simpleUpdate(float tpf) {
+        try {
+            queue.take().run();
+        } catch (InterruptedException e) {}
     }
 
 }

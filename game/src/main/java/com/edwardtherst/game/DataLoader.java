@@ -106,8 +106,6 @@ public class DataLoader {
                     } catch (Exception e) {System.out.println(e.getMessage());}
                 }
             } catch (Exception e) {System.out.println(e.getMessage());}
-            System.out.println(BlockImages.toString());
-
             //items
 
             try {
@@ -120,7 +118,7 @@ public class DataLoader {
                             Material flatMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
                             flatMat.setTexture("ColorMap", image);
                             String name = itemfile.toString().split("/")[itemfile.toString().split("/").length-1].replace(".png", "");
-                            BlockImages.put(name, flatMat);
+                            ItemImages.put(name, flatMat);
                         }
                     } catch (Exception e) {}
                 }
@@ -135,12 +133,17 @@ public class DataLoader {
                             Material flatMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
                             flatMat.setTexture("ColorMap", image);
                             String name = entityfile.toString().split("/")[entityfile.toString().split("/").length-1].replace(".png", "");
-                            BlockImages.put(name, flatMat);
+                            EntityImages.put(name, flatMat);
                         }
                     } catch (Exception e) {}
                 }
             } catch (Exception e) {}
         }
+        System.out.println(BlockImages.toString());
+        System.out.println(ItemImages.toString());
+        System.out.println(EntityImages.toString());
+
+
     }
 
     public void destroy () {
