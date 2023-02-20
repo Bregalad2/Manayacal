@@ -10,6 +10,7 @@ import java.util.concurrent.BlockingQueue;
 
 import com.jme3.asset.AssetManager;
 import com.jme3.cinematic.Cinematic;
+import com.jme3.math.Vector2f;
 
 public class PlayingScreen {
     DataLoader dLoader;
@@ -31,8 +32,6 @@ public class PlayingScreen {
 		assetManager = aManager;
 		rootNode = rNode;
 		bMapper = new BlockMapper();
-    
-
 		camera = cam;
         cinematic = new Cinematic(rootNode, 20);
         camNodeSide = cinematic.bindCamera("sideView", cam);
@@ -53,7 +52,7 @@ public class PlayingScreen {
     private void generate () {
         for (Integer x = -20; x < 20; x++) {
             for (Integer y = -20; y < 20; y++) {
-				if (y<0 && x+y%3 != 2) {
+				if (y<(x^2)) {
 					wLoader.addBlock(x, y, 0, "dirt", "null");
 				} else {wLoader.addBlock(x, y, 0, "air", "null");}
             }
@@ -65,22 +64,25 @@ public class PlayingScreen {
 
 	public void onAction(String name, boolean pressed, float tpf){
 		if (name == "moveRight") {
-			physics.PlayerKeys[0] = pressed;
+			physics.Keys[0] = pressed;
 		}
 		if (name == "moveLeft") {
-			physics.PlayerKeys[1] = pressed;
+			physics.Keys[1] = pressed;
 		}
 		if (name == "moveUp") {
-			physics.PlayerKeys[2] = pressed;
+			physics.Keys[2] = pressed;
 		}
 		if (name == "moveDown") {
-			physics.PlayerKeys[3] = pressed;
+			physics.Keys[3] = pressed;
 		}
-		if (OldLocation[0] > Math.round(physics.PlayerPos[0])+4 || OldLocation[0] < Math.round(physics.PlayerPos[0])-4 || OldLocation[1] > Math.round(physics.PlayerPos[1]) +4 || OldLocation[1] < Math.round(physics.PlayerPos[1]) -4) {
-			OldLocation[0] = Math.round(physics.PlayerPos[0]);
-			OldLocation[1] = Math.round(physics.PlayerPos[1]);
-			bMapper.DrawBlocksInRange(Math.round(physics.PlayerPos[0]), Math.round(physics.PlayerPos[1]));
+		if (OldLocation[0] > Math.round(cThread.Player.Pos[0])+4 || OldLocation[0] < Math.round(cThread.Player.Pos[0])-4 || OldLocation[1] > Math.round(cThread.Player.Pos[1]) +4 || OldLocation[1] < Math.round(cThread.Player.Pos[1]) -4) {
+			OldLocation[0] = Math.round(cThread.Player.Pos[0]);
+			OldLocation[1] = Math.round(cThread.Player.Pos[1]);
+			bMapper.DrawBlocksInRange(Math.round(cThread.Player.Pos[0]), Math.round(cThread.Player.Pos[1]));
 			System.out.println(Arrays.toString(OldLocation));
+		}
+		if (name == "click") {
+			cThread.regesterClick(pressed, tpf);
 		}
 	}
 

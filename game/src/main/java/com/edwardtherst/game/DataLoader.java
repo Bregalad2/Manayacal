@@ -13,6 +13,7 @@ import org.json.simple.parser.*;
 import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
 import com.jme3.texture.Texture;
+import com.jme3.ui.Picture;
 
 public class DataLoader {
     List<File> Paths =  new LinkedList<File>();
@@ -21,7 +22,7 @@ public class DataLoader {
     JSONObject ITEMS = null;
     JSONObject ENTITIES = null;
     Map<String, Material> BlockImages = new HashMap<String, Material>();
-    Map<String, Material> ItemImages = new HashMap<String, Material>();
+    Map<String, Picture> ItemImages = new HashMap<String, Picture>();
     Map<String, Material> EntityImages = new HashMap<String, Material>();
     public void init (List<File> paths, AssetManager manager) {
         BLOCKS = new JSONObject();
@@ -109,22 +110,21 @@ public class DataLoader {
             //items
 
             try {
-                File[] itemimagefiles = new File(path.toString()+"/entities").listFiles();
+                File[] itemimagefiles = new File(path.toString()+"/items").listFiles();
                 for (Integer a = 0; a < itemimagefiles.length; a++) {
                     try {
                         File itemfile = itemimagefiles[a];
                         if (itemfile.toString().endsWith(".png")) {
-                            Texture image = assetManager.loadTexture(itemfile.toString().replace("game/src/main/resources/", ""));
-                            Material flatMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-                            flatMat.setTexture("ColorMap", image);
+                            Picture pic = new Picture("Default Icon of "+itemfile);
+                            pic.setImage(assetManager, itemfile.toString().replace("game/src/main/resources/", ""), true);
                             String name = itemfile.toString().split("/")[itemfile.toString().split("/").length-1].replace(".png", "");
-                            ItemImages.put(name, flatMat);
+                            ItemImages.put(name, pic);
                         }
                     } catch (Exception e) {}
                 }
             } catch (Exception e) {}
             try {
-                File[] entityfiles = new File(path.toString()+"/items").listFiles();
+                File[] entityfiles = new File(path.toString()+"/entities").listFiles();
                 for (Integer a = 0; a < entityfiles.length; a++) {
                     try {
                         File entityfile = entityfiles[a];

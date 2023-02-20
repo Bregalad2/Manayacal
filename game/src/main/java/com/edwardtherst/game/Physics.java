@@ -2,25 +2,14 @@ package com.edwardtherst.game;
 
 import java.util.concurrent.BlockingQueue;
 
-import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Node;
 
 public class Physics {
+    Boolean[] Keys = new Boolean[]{false, false, false, false};
     CollisionDetection Detector;
     WorldLoader Loader;
     CameraThread cThread;
-    Boolean[] PlayerKeys = new Boolean[]{false, false, false, false};
-    Float[] PlayerPos = new Float[]{0f, 0f};
-	Float[] PlayerSpeed = new Float[]{0f, 0f};
-    Float maxSpeed = 0.05f;
-    Float acceleration = 0.01f;
-    Float jumpPower = 0.2f;
-    Float gravity = -0.01f;
-    Float playerWidth = 0.05f;
-    Float playerHeight = 0.1f;
-    Boolean onGround = true;
-    Integer playerId;
 
     public void init(WorldLoader loader, CameraThread cameraThread, CollisionDetection CDetector) {
         Loader = loader;
@@ -30,47 +19,68 @@ public class Physics {
     public void MovePlayer(Integer[] dxdy) {
         
     }
-    public void run(Camera camera, Node node, BlockingQueue<Runnable> queue) {
-        while (true) {
+    public void run(Camera camera, Node node, BlockingQueue<Runnable> queue, Entity Player) {
+            Boolean[] touching = Detector.getSolidTouching(Math.round(Player.Pos[0]), Math.round(Player.Pos[1]));
             try {
                 Thread.sleep(20);
             } catch (Exception e) {}
-            if (PlayerKeys[0] && PlayerSpeed[0] < maxSpeed) {
-                PlayerSpeed[0] += acceleration;
+            if (Keys[0] && Player.Speed[0] < Player.MaxSpeed) {
+                Player.Speed[0] += Player.Acceleration;
             }
-            if (PlayerKeys[1] && PlayerSpeed[0] > -maxSpeed) {
-                PlayerSpeed[0] -= acceleration;
+            if (Keys[1] && Player.Speed[0] > -Player.MaxSpeed) {
+                Player.Speed[0] -= Player.Acceleration;
             }
-            if (!PlayerKeys[0] && !PlayerKeys[1]) {
-                PlayerSpeed[0] = 0f;
+            if (!Keys[0] && !Keys[1]) {
+                if (Player.Speed[0] > 0) {
+                    Player.Speed[0] -= Player.Acceleration;
+                }
+                if (Player.Speed[0] > 0) {
+                    Player.Speed[0] += Player.Acceleration;
+                }
             }
-            if (PlayerKeys[2] && onGround) {
-                PlayerSpeed[1] = jumpPower;
-                onGround = false;
+            if (touching[1] && Player.Speed[0] > 0.0f) {
+                if (Player.Pos[0] > 0 && Player.Pos[0]%1 > 0.8) {
+                    Player.Speed[0] = 0.0f;
+                } else if (Player.Pos[0] < 0 && Player.Pos[0]%1+1 > 0.8) {
+                    Player.Speed[0] = 0.0f;
+                }
+            }
+            if (touching[2] && Player.Speed[0] < 0.0f) {
+                if (Player.Pos[0] > 0 && Player.Pos[0]%1 < 0.2) {
+                    Player.Speed[0] = 0.0f;
+                } else if (Player.Pos[0] < 0 && Player.Pos[0]%1+1 < 0.2) {
+                    Player.Speed[0] = 0.0f;
+                }
+            
+
+            }
+            if (Keys[2] && Player.OnGround) {
+                Player.Speed[1] = Player.JumpPower;
+                Player.OnGround = false;
             }
             try {
-                if (Detector.getSolidTouching(Math.round(PlayerPos[0]), Math.round(PlayerPos[1]))[4]) {
-                    if (PlayerSpeed[1] < 0) {
-                        PlayerSpeed[1] = 0f;
+                if (touching[4]) {
+                    if (Player.Speed[1] < 0) {
+                        Player.Speed[1] = 0f;
+                        
+                        Player.OnGround = true;
+                    } else if (Player.Speed[1] > 0) {}
+                    if (Player.OnGround && !touching[0]) {
+                        Player.Pos[1] = (float) Math.floor(Player.Pos[1]);
                     }
-                    onGround = true;
                 } else {
-                    PlayerSpeed[1] += gravity;
-                    onGround = false;
+                    Player.Speed[1] += Player.Gravity;
+                    Player.OnGround = false;
                 }
+                if (touching[0]) {
+                    //Player.Speed[1] = 0.2f;
+                }
+            //System.out.println();
             } catch (Exception e) {
-                PlayerSpeed[1] += gravity;
+                Player.Speed[1] += Player.Gravity;
             }
-            camera.setLocation(new Vector3f(PlayerPos[0], PlayerPos[1], 10f));
-            queue.add(new Runnable(){
-                @Override
-                public void run() {
-                    node.getChild("Player").setLocalTranslation(new Vector3f(PlayerPos[0], PlayerPos[1],-3f));
-                }
-            });
-            PlayerPos[0] += PlayerSpeed[0];
-            PlayerPos[1] += PlayerSpeed[1];
-        }
+            Player.Pos[0] += Player.Speed[0];
+            Player.Pos[1] += Player.Speed[1];
     }
 
     public Integer[] getPlayerXY() {

@@ -32,7 +32,9 @@ public class BlockMapper {
             for (Integer b = y-10; b < y+10; b++) {
                 String geo = BlockMap.get(x.toString()+ "&"+y.toString());
                 if (geo != null) {
-                    rootNode.attachChild(rootNode.getChild(x.toString()+ "&"+y.toString()));
+                    try {
+                        rootNode.attachChild(rootNode.getChild(x.toString()+ "&"+y.toString()));
+                    } catch (Exception e) {}
                     continue;
                 } else {
                     String block = wLoader.getBlock(a, b, 0)[0];
@@ -45,7 +47,7 @@ public class BlockMapper {
                                 flatGeo.setMaterial(dLoader.BlockImages.get(block));
                                 rootNode.attachChild(flatGeo);
                                 Detector.addToMap(a, b, "solid");
-                                BlockMap.put(a.toString(0, 0)+"&"+b.toString(), block);
+                                BlockMap.put(a.toString()+"&"+b.toString(), block);
                             }
                         } catch (Exception e) {
                             System.out.println(e);
@@ -66,6 +68,7 @@ public class BlockMapper {
 
             }
         }
-
+        
+    
     }
 }

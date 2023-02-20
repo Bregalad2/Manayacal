@@ -1,0 +1,7 @@
+{
+    "slots": ["1&1", "1&33", "33&1", "33&33"],
+    "slotInteractivity": ["storage", "storage", "storage", "storage"],
+    "buttons": ["1&65|30x30|but"],
+    "buttonInteractivity": ["nothing"]
+
+}
